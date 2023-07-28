@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QMainWindow, QApplication, QPushButton
-from PyQt6.QtCore import pyqtSlot, QFile, QTextStream
+from PyQt6.QtCore import pyqtSlot, QFile, QTextStream, QIODevice
 
 from sidebar_ui import Ui_MainWindow
 
@@ -73,12 +73,18 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    
+
     ## loading style file
     with open("style.qss", "r") as style_file:
-        style_str = style_file.read()    
+        style_str = style_file.read()
     app.setStyleSheet(style_str)
-    
+
+    ## loading style file, Example 2
+    # style_file = QFile("style.qss")
+    # style_file.open(QFile.ReadOnly | QFile.Text)
+    # style_stream = QTextStream(style_file)
+    # app.setStyleSheet(style_stream.readAll())
+
     window = MainWindow()
     window.show()
 
